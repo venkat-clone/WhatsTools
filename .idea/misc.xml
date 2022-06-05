@@ -4,14 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_qr_code_24.xml" value="0.2365" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2725" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_back_ios_24.xml" value="0.1775" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_forward_24.xml" value="0.2365" />
+        <entry key="app/src/main/res/drawable/whatsapp.xml" value="0.2725" />
         <entry key="app/src/main/res/drawable/window_background.xml" value="0.2365" />
         <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.5936936936936937" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2817443351859769" />
         <entry key="app/src/main/res/layout/activity_status.xml" value="0.13852073535699017" />
-        <entry key="app/src/main/res/layout/fragment_status_list.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/fragment_media.xml" value="0.2817443351859769" />
+        <entry key="app/src/main/res/layout/fragment_status_list.xml" value="0.20906370243693886" />
         <entry key="app/src/main/res/layout/home_message_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/status_item.xml" value="0.5" />
       </map>
     </option>
   </component>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="path"
+            type="String" />
+    </data>
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="5dp"
+        app:cardElevation="12dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        app:cardBackgroundColor="#0A2A68"
+        android:layout_height="200dp">
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </androidx.cardview.widget.CardView>
+
+</layout>
