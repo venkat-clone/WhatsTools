@@ -4,6 +4,7 @@
     package="com.android.whatstools">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsTools"
         tools:targetApi="31">
+        <activity
+            android:name=".screen.MessageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".screen.WEBActivity"
+            android:exported="false" />
         <activity
             android:name=".screen.StatusActivity"
             android:exported="false" />

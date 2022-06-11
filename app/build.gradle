@@ -5,6 +5,9 @@ plugins {
 
 android {
     compileSdk 32
+    apply plugin: 'com.android.application'
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
     apply plugin: 'kotlin-kapt'
     defaultConfig {
         applicationId "com.android.whatstools"
@@ -17,7 +20,9 @@ android {
     }
     buildFeatures{
         viewBinding true
-        dataBinding true
+    }
+    dataBinding {
+        enabled = true
     }
 
     buildTypes {
@@ -48,4 +53,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     // View Model
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    // Room DB
+    kapt 'androidx.room:room-compiler:2.5.0-alpha02'
+    implementation 'androidx.room:room-runtime:2.5.0-alpha02'
 }

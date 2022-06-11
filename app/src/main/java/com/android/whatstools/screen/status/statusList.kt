@@ -29,6 +29,7 @@ class StatusList : Fragment() {
         return binding.root
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this)[StatusListViewModel::class.java]
@@ -49,7 +50,7 @@ class StatusList : Fragment() {
         })
         viewModel.status.observe(viewLifecycleOwner) {
             if (it != null) {
-                statusViewModel.status.postValue(it)
+                statusViewModel.status.postValue(it.path)
 //                requireFragmentManager().beginTransaction().add(MediaFragment(),"").commit()
             }
         }

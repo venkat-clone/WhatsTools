@@ -10,6 +10,8 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -25,8 +27,11 @@ import androidx.core.view.marginEnd
 import androidx.core.view.setMargins
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.android.whatstools.Utlis.BaseClass
 import com.android.whatstools.databinding.ActivityMainBinding
+import com.android.whatstools.screen.MessageActivity
 import com.android.whatstools.screen.StatusActivity
+import com.android.whatstools.screen.WEBActivity
 import java.security.Permission
 import java.util.jar.Manifest
 
@@ -34,6 +39,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mViewModel:MainActivityViewModel;
     private lateinit var binding:ActivityMainBinding;
     override fun onCreate(savedInstanceState: Bundle?) {
+        var display:DisplayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(display)
+        BaseClass.deviceWidth= display.widthPixels
+        BaseClass.deviceHeight = display.heightPixels
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -41,7 +50,6 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         setContentView(binding.root)
         binding.viewModel=mViewModel
-
 
 
         observers()
@@ -120,11 +128,17 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun onClickQr(view: View){
+        val intent:Intent = Intent(this,WEBActivity::class.java)
+        startActivity(intent)
+    }
+
     // For Click Actions
      class ClickHandler(context :Context){
         lateinit var context:Context
         fun onClickQr(view: View){
-
+            val intent:Intent = Intent(context,StatusActivity::class.java)
+            context.startActivity(intent)
         }
         init {
             this.context = context
@@ -144,6 +158,18 @@ class MainActivity : AppCompatActivity() {
             startActivity(view.context,intent,null)
 //            startActivity(intent)
         }
+    }
+
+    fun messages(view: View){
+        val intent:Intent = Intent(this,MessageActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun magicText(view: View){
+
+    }
+    fun about(view: View){
+
     }
 
 

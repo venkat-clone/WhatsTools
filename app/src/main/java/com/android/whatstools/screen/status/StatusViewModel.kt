@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.android.whatstools.Utlis.StatusItem
 
 class StatusViewModel:ViewModel() {
-    var status: MutableLiveData<StatusItem> = MutableLiveData()
+    var status: MutableLiveData<String> = MutableLiveData()
+    var removeFragment:MutableLiveData<Boolean> = MutableLiveData()
 
 }

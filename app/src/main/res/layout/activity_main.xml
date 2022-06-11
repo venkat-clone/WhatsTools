@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:onClick="@{ClickHandler::onClickQr}"
+                    android:onClick="onClickQr"
                     android:layout_gravity="end"
                     android:src="@drawable/ic_baseline_qr_code_24"
                     android:layout_marginTop="30dp"
@@ -246,13 +246,13 @@
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginBottom="20dp"
                             app:boxStrokeWidth="3dp"
+                            app:boxBackgroundColor="@color/lite_blue"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/bulk">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:text="@={ViewModel.message}"
-                                android:background="@color/lite_blue"
                                 android:gravity="top|start"
                                 android:minLines="4"
                                 android:layout_width="match_parent"
@@ -260,49 +260,78 @@
                         </com.google.android.material.textfield.TextInputLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
-                <GridLayout
-                    android:layout_margin="40dp"
-                    android:columnCount="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                </GridLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <androidx.cardview.widget.CardView
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/imageView2"
+                        android:onClick="messages"
+                        SqureWithWidth="@{0.20}"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardElevation="5dp"
+                        app:cardBackgroundColor="@color/lite_blue"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="12dp"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent" >
+                        <ImageView
+                            android:tint="@color/white"
+                            android:src="@drawable/message"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/imageView"
+                        android:onClick="magicText"
+                        SqureWithWidth="@{0.20}"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="5dp"
+                        app:cardBackgroundColor="@color/lite_blue"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/imageView2" >
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/snowflakes"
+                            android:tint="@color/white"
+                            android:padding="22dp"
+                            />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/imageView3"
+                        SqureWithWidth="@{0.20}"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="12dp"
+                        android:onClick="about"
+                        app:cardElevation="5dp"
+                        app:cardBackgroundColor="@color/lite_blue"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/imageView" >
+
+                    </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    setHeightRatio="@{0.2}"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"/>
 
 
             </LinearLayout>
