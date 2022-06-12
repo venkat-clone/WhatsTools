@@ -10,6 +10,9 @@
         <variable
             name="ClickHandler"
             type="com.android.whatstools.MainActivity.ClickHandler" />
+        <variable
+            name="view"
+            type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:onClick="@{ClickHandler::onClickQr}"
+                    android:onClick="onClickQr"
                     android:layout_gravity="end"
                     android:src="@drawable/ic_baseline_qr_code_24"
                     android:layout_marginTop="30dp"
@@ -64,6 +67,7 @@
                             android:lineSpacingExtra="20dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
 <!--                            <ImageView-->
 <!--                                android:layout_margin="20dp"-->
 <!--                                android:layout_columnWeight="1"-->
@@ -83,7 +87,23 @@
 <!--                                android:layout_width="0dp"-->
 <!--                                android:layout_height="80dp"/>-->
                         </GridLayout>
-
+                        <TextView
+                            android:id="@+id/permession"
+                            android:visibility="@{ViewModel.permission?view.GONE:view.VISIBLE}"
+                            android:layout_margin="40dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:text="Please Enable Permission"/>
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:visibility="@{!ViewModel.permission?view.GONE:view.VISIBLE}"
+                            android:id="@+id/lottie"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            android:layout_margin="50dp"
+                            app:lottie_fileName="lodder.json"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
                 <TextView
@@ -94,31 +114,29 @@
                     android:textSize="24sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-                <ListView
-                    android:visibility="gone"
-                    tools:listitem="@layout/home_message_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
                 <TextView
-                    android:visibility="gone"
+                    android:layout_margin="30dp"
+                    android:visibility="@{ViewModel.messages.empty?view.VISIBLE:view.GONE}"
                     android:textColor="#B2FFFFFF"
                     android:layout_gravity="center"
-                    android:text="No Message Found"
+                    android:text="No Message at the Moment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <com.google.android.material.card.MaterialCardView app:cardCornerRadius="15dp"
-                    android:layout_marginHorizontal="20dp"
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/message_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="#030B25"
-                    >
-                   <ImageView
-                       android:layout_width="match_parent"
-                       android:layout_height="100dp"/>
-                </com.google.android.material.card.MaterialCardView>
+                    android:layout_height="100dp">
+
+                </androidx.viewpager.widget.ViewPager>
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/message_tab"
+                    app:tabBackground="@drawable/dot_indicator"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabGravity="center"
+                    android:background="#00061D4A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_marginTop="50dp"
                     android:layout_marginBottom="20dp"
                     app:cardCornerRadius="15dp"
                     android:layout_marginHorizontal="20dp"
@@ -246,13 +264,13 @@
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginBottom="20dp"
                             app:boxStrokeWidth="3dp"
+                            app:boxBackgroundColor="@color/lite_blue"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/bulk">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:text="@={ViewModel.message}"
-                                android:background="@color/lite_blue"
                                 android:gravity="top|start"
                                 android:minLines="4"
                                 android:layout_width="match_parent"
@@ -260,49 +278,78 @@
                         </com.google.android.material.textfield.TextInputLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
-                <GridLayout
-                    android:layout_margin="40dp"
-                    android:columnCount="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                    <ImageView
-                        android:layout_margin="20dp"
-                        android:layout_columnWeight="1"
-                        android:background="@color/white"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"/>
-                </GridLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <androidx.cardview.widget.CardView
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/imageView2"
+                        android:onClick="messages"
+                        SqureWithWidth="@{0.20}"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardElevation="5dp"
+                        app:cardBackgroundColor="@color/lite_blue"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="12dp"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent" >
+                        <ImageView
+                            android:tint="@color/white"
+                            android:src="@drawable/message"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/imageView"
+                        android:onClick="magicText"
+                        SqureWithWidth="@{0.20}"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="5dp"
+                        app:cardBackgroundColor="@color/lite_blue"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/imageView2" >
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/snowflakes"
+                            android:tint="@color/white"
+                            android:padding="22dp"
+                            />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/imageView3"
+                        SqureWithWidth="@{0.20}"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="12dp"
+                        android:onClick="about"
+                        app:cardElevation="5dp"
+                        app:cardBackgroundColor="@color/lite_blue"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/imageView" >
+
+                    </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    setHeightRatio="@{0.2}"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"/>
 
 
             </LinearLayout>

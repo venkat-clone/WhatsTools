@@ -4,6 +4,7 @@
     package="com.android.whatstools">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +17,12 @@
         android:theme="@style/Theme.WhatsTools"
         tools:targetApi="31">
         <activity
+            android:name=".screen.MessageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".screen.WEBActivity"
+            android:exported="false" />
+        <activity
             android:name=".screen.StatusActivity"
             android:exported="false" />
         <activity
@@ -27,6 +34,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name="com.android.whatstools.utlis.broadcasts.NotificationReceiver"
+
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.service.notification.NotificationListenerService" />-->
+<!--            </intent-filter>-->
+<!--            <meta-data-->
+<!--                android:name="android.service.notification.default_filter_types"-->
+<!--                android:value="conversations|alerting">-->
+<!--            </meta-data>-->
+<!--            <meta-data-->
+<!--                android:name="android.service.notification.disabled_filter_types"-->
+<!--                android:value="ongoing|silent">-->
+<!--            </meta-data>-->
     </application>
 
 </manifest>
