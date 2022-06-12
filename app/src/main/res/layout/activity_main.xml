@@ -10,6 +10,9 @@
         <variable
             name="ClickHandler"
             type="com.android.whatstools.MainActivity.ClickHandler" />
+        <variable
+            name="view"
+            type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,6 +67,7 @@
                             android:lineSpacingExtra="20dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
 <!--                            <ImageView-->
 <!--                                android:layout_margin="20dp"-->
 <!--                                android:layout_columnWeight="1"-->
@@ -83,7 +87,23 @@
 <!--                                android:layout_width="0dp"-->
 <!--                                android:layout_height="80dp"/>-->
                         </GridLayout>
-
+                        <TextView
+                            android:id="@+id/permession"
+                            android:visibility="@{ViewModel.permission?view.GONE:view.VISIBLE}"
+                            android:layout_margin="40dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:text="Please Enable Permission"/>
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:visibility="@{!ViewModel.permission?view.GONE:view.VISIBLE}"
+                            android:id="@+id/lottie"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            android:layout_margin="50dp"
+                            app:lottie_fileName="lodder.json"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
                 <TextView
@@ -94,31 +114,29 @@
                     android:textSize="24sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-                <ListView
-                    android:visibility="gone"
-                    tools:listitem="@layout/home_message_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
                 <TextView
-                    android:visibility="gone"
+                    android:layout_margin="30dp"
+                    android:visibility="@{ViewModel.messages.empty?view.VISIBLE:view.GONE}"
                     android:textColor="#B2FFFFFF"
                     android:layout_gravity="center"
-                    android:text="No Message Found"
+                    android:text="No Message at the Moment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <com.google.android.material.card.MaterialCardView app:cardCornerRadius="15dp"
-                    android:layout_marginHorizontal="20dp"
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/message_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="#030B25"
-                    >
-                   <ImageView
-                       android:layout_width="match_parent"
-                       android:layout_height="100dp"/>
-                </com.google.android.material.card.MaterialCardView>
+                    android:layout_height="100dp">
+
+                </androidx.viewpager.widget.ViewPager>
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/message_tab"
+                    app:tabBackground="@drawable/dot_indicator"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabGravity="center"
+                    android:background="#00061D4A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_marginTop="50dp"
                     android:layout_marginBottom="20dp"
                     app:cardCornerRadius="15dp"
                     android:layout_marginHorizontal="20dp"

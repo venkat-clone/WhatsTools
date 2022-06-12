@@ -1,16 +1,13 @@
 package com.android.whatstools.screen.status
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.ThumbnailUtils
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.whatstools.Utlis.DataClass
-import com.android.whatstools.Utlis.StatusItem
+import com.android.whatstools.utlis.StatusItem
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors

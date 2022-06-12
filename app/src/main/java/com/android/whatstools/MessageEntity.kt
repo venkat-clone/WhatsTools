@@ -9,7 +9,8 @@ data class MessageEntity(
     val name: String,
     val message: String,
     val profile: String,
-    val number: Float=0F,
+    val number: Float =0F,
+    val date: Long=0,
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null
 )

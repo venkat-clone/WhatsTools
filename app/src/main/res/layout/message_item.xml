@@ -37,13 +37,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:id="@+id/profile_dp"
                     android:layout_width="50dp"
+                    app:cardBackgroundColor="@color/blue_A"
                     android:layout_height="50dp">
 
                 <ImageView
+                    android:id="@+id/Dp"
+                    android:src="@color/blue_A"
+                    loadDp="@{model.profile}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:background="@color/white"/>
+                    android:scaleType="fitCenter"
+                    />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -74,6 +78,7 @@
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:gravity="end"
+                    setDate="@{model.date}"
                     android:text="19/02/2002  6:30 PM"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_width="match_parent"

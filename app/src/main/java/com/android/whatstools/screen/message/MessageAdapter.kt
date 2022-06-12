@@ -1,4 +1,4 @@
-package com.android.whatstools.screen.Message
+package com.android.whatstools.screen.message
 
 import android.content.Context
 import android.util.Log
@@ -6,18 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.whatstools.MessageEntity
 import com.android.whatstools.R
 
 import com.android.whatstools.databinding.MessageItemBinding
+import com.android.whatstools.utlis.LoadDp
 
 class MessageAdapter(context:Context): RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
 
     var list :MutableList<MessageEntity> = ArrayList()
-    var Lpos:Int =-1
+    var Lpos:Int =0
 
     var context: Context
     init {
@@ -27,13 +26,12 @@ class MessageAdapter(context:Context): RecyclerView.Adapter<MessageAdapter.ViewH
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageAdapter.ViewHolder {
-        Log.i("onBindViewHolder","$list")
+
         val binding = MessageItemBinding.inflate(LayoutInflater.from(context),parent,false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MessageAdapter.ViewHolder, position: Int) {
-        Log.i("onBindViewHolder","$position")
         holder.binding.model = list[position]
         Animate(position,holder.binding.root)
     }
@@ -50,7 +48,8 @@ class MessageAdapter(context:Context): RecyclerView.Adapter<MessageAdapter.ViewH
     }
 
     fun upDate(list:List<MessageEntity>){
-        this.list.addAll(list)
+        Lpos=0
+        this.list = ArrayList(list)
         notifyDataSetChanged()
 
     }

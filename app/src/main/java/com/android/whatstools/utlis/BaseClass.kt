@@ -1,6 +1,4 @@
-package com.android.whatstools.Utlis
-
-import android.util.Log
+package com.android.whatstools.utlis
 
 abstract class BaseClass {
 

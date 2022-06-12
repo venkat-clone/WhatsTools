@@ -1,4 +1,4 @@
-package com.android.whatstools.Utlis
+package com.android.whatstools.utlis
 
 import android.graphics.Bitmap
 

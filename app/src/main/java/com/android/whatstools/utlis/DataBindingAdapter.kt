@@ -1,14 +1,20 @@
-package com.android.whatstools.Utlis
+package com.android.whatstools.utlis
 
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.media.ThumbnailUtils
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import com.android.whatstools.R
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.roundToInt
 
 
@@ -24,6 +30,21 @@ import kotlin.math.roundToInt
             } else {
                 view.setImageURI(File(s).toUri())
             }
+        }
+
+
+        @BindingAdapter("loadDp")
+        fun LoadDp(v:ImageView,loadDp:String){
+            if(loadDp.isNotEmpty())
+                v.setImageURI(File(loadDp).toUri())
+
+        }
+
+        @BindingAdapter("setDate")
+        fun setDate(view:TextView,date:Long){
+            val formatter:SimpleDateFormat = SimpleDateFormat("dd MMM yyyy hh:mm aaa")
+
+            view.text = formatter.format(Date(date))
         }
 
         @BindingAdapter("setWidthRatio")

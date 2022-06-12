@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.android.whatstools.screen.message.MessageActivityViewModel" />
+        <variable
+            name="view"
+            type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -22,11 +27,114 @@
             android:titleTextColor="@color/white"
             app:layout_constraintTop_toTopOf="parent" />
         <androidx.recyclerview.widget.RecyclerView
-
+            android:visibility="@{viewModel.screen==1?view.VISIBLE:view.GONE}"
+            tools:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:id="@+id/messageRecycler"
             tools:listitem="@layout/message_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+        <LinearLayout
+            tools:visibility="gone"
+            android:visibility="@{viewModel.screen==2?view.VISIBLE:view.GONE}"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie"
+                app:lottie_fileName="empty_notification.json"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="70dp"/>
+            <TextView
+                android:textStyle="bold"
+
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="Enable Notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_margin="20dp"
+                android:textColor="#7889A5"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:ems="14"
+                android:minLines="4"
+                android:text="Enable notification so that You don't miss another message deleted by your friend's , family and others "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_weight="1"
+                app:lottie_fileName="notification_btn1.json"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                android:onClick="requestPermission"
+                android:layout_width="100dp"
+                android:layout_height="50dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="@{viewModel.screen==3?view.VISIBLE:view.GONE}"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <View
+                android:layout_weight=".8"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"/>
+            <com.airbnb.lottie.LottieAnimationView
+
+                app:lottie_fileName="no_notifications.json"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
+            <View
+                android:layout_weight="0.7"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"/>
+            <TextView
+                android:textStyle="bold"
+
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="No Messages Right Now"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_margin="20dp"
+                android:textColor="#7889A5"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:ems="13"
+                android:minLines="4"
+                android:text="From now onwards You wont Be missing any message's deleted  by your friend's and family "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_weight="0.2"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"/>
+
+        </LinearLayout>
+        <ProgressBar
+            android:visibility="@{viewModel.screen==1?view.VISIBLE:view.GONE}"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
     </LinearLayout>
 </layout>

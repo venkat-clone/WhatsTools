@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../.gradle/caches/transforms-3/bd6d0e44f2aa57426d64e02a13067df9/transformed/material-1.6.0/res/drawable/mtrl_tabs_default_indicator.xml" value="0.1845" />
+        <entry key="app/src/main/res/drawable/dot_indicator.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/ic_baseline_qr_code_24.xml" value="0.2365" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2725" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_back_ios_24.xml" value="0.1775" />

@@ -10,6 +10,6 @@ import com.android.whatstools.MessageEntity
 interface  Dao {
     @Insert
     fun insert(messageEntity: MessageEntity)
-    @Query("select * from Notification ")
+    @Query("select * from Notification ORDER BY date DESC")
     fun getAllNotes(): LiveData<List<MessageEntity>>
 }

@@ -1,9 +1,10 @@
 package com.android.whatstools
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
-import android.graphics.Bitmap
 import android.media.ThumbnailUtils
 import android.net.Uri
 import android.os.Build
@@ -11,29 +12,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
-import android.webkit.PermissionRequest
 import android.widget.*
-import androidx.core.content.ContextCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.PermissionChecker
+import androidx.core.content.getSystemService
+import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
-import androidx.core.view.marginBottom
-import androidx.core.view.marginEnd
 import androidx.core.view.setMargins
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.android.whatstools.Utlis.BaseClass
+import com.android.whatstools.utlis.BaseClass
 import com.android.whatstools.databinding.ActivityMainBinding
+import com.android.whatstools.screen.HomeMessagePager
 import com.android.whatstools.screen.MessageActivity
 import com.android.whatstools.screen.StatusActivity
 import com.android.whatstools.screen.WEBActivity
-import java.security.Permission
-import java.util.jar.Manifest
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mViewModel:MainActivityViewModel;
@@ -54,9 +51,11 @@ class MainActivity : AppCompatActivity() {
 
         observers()
         if(PermissionChecker.checkSelfPermission(this,android.Manifest.permission_group.STORAGE)==PermissionChecker.PERMISSION_DENIED){
+            mViewModel.permission.value = false
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),500)
             }
+
         }else {
             mViewModel.getStatus()
         }
@@ -89,9 +88,11 @@ class MainActivity : AppCompatActivity() {
             intent.`package` = "com.whatsapp"
             startActivity(intent)
         }
-        mViewModel.StatusList.observe(this, Observer {
+        mViewModel.StatusList.observe(this) {
             it!!
-            mViewModel.setStatus()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                it.removeIf { fil->fil.path.contains(".nomedia") }
+            }
             for (i in 1..6 ) {
                 val view:ImageView = ImageView(baseContext)
                 val parms = GridLayout.LayoutParams()
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                         it[i].path,
                         MediaStore.Images.Thumbnails.MICRO_KIND))
                 }
-                else {
+                else  {
                     view.setImageURI(it[i].toUri())
                 }
                 view.setOnClickListener {_it->
@@ -114,18 +115,31 @@ class MainActivity : AppCompatActivity() {
                     intent.putExtra("path",it[i].path)
                     startActivity(intent)
                 }
+                binding.lottie.visibility = View.GONE
                 binding.grid.addView(view)
                 println({ it[i].path.contains(".mp4") })
 
             }
-        })
+        }
+
+        mViewModel.messages.observe(this){
+            val mList = it.subList(0,if(it.size>5) 4 else it.size)
+            val pager :HomeMessagePager= HomeMessagePager(mList,this)
+            binding.messagePager.adapter = pager
+            binding.messageTab.setupWithViewPager(binding.messagePager)
+
+        }
+
+
 
     }
 
 
     fun openStatus(view:View){
-        val intent:Intent = Intent(baseContext,StatusActivity::class.java)
-        startActivity(intent)
+        if(mViewModel.permission.value == true){
+            val intent: Intent = Intent(baseContext, StatusActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun onClickQr(view: View){
