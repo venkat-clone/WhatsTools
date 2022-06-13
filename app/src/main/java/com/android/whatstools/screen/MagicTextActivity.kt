@@ -30,17 +30,14 @@ class MagicTextActivity : AppCompatActivity() {
         binding.toolbar.toolbar.setNavigationOnClickListener(){
             onBackPressed()
         }
-        viewModel.text.observe(this){
-
-        }
         viewModel.dotText.observe(this){
-            if(it.isNotEmpty())viewModel.text.value = BaseClass.BaseText.replace(".",it)
+            viewModel.Genaratetext()
         }
         viewModel.starText.observe(this){
-            if(it.isNotEmpty()) viewModel.text.value = BaseClass.BaseText.replace("*",it)
+            viewModel.Genaratetext()
         }
         viewModel.mainText.observe(this){
-
+            viewModel.Genaratetext()
         }
 
     }

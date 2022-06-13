@@ -4,20 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../.gradle/caches/transforms-3/bd6d0e44f2aa57426d64e02a13067df9/transformed/material-1.6.0/res/drawable/mtrl_tabs_default_indicator.xml" value="0.1845" />
-        <entry key="..\:/Users/shravan/AndroidStudioProjects/WhatsTools/app/src/main/res/drawable/card_background_1.xml" value="0.188" />
-        <entry key="..\:/Users/shravan/AndroidStudioProjects/WhatsTools/app/src/main/res/drawable/card_background_2.xml" value="0.188" />
-        <entry key="..\:/Users/shravan/AndroidStudioProjects/WhatsTools/app/src/main/res/drawable/window_background.xml" value="0.188" />
-        <entry key="..\:/Users/shravan/AndroidStudioProjects/WhatsTools/app/src/main/res/layout/activity_magic_text.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/shravan/AndroidStudioProjects/WhatsTools/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="app/src/main/res/drawable/card_background_2.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/dot_indicator.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/ic_baseline_qr_code_24.xml" value="0.2365" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2725" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_back_ios_24.xml" value="0.1775" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_forward_24.xml" value="0.2365" />
+        <entry key="app/src/main/res/drawable/magic_text_background.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/message.xml" value="0.2635" />
         <entry key="app/src/main/res/drawable/whatsapp.xml" value="0.2725" />
         <entry key="app/src/main/res/drawable/window_background.xml" value="0.2365" />
         <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.5936936936936937" />
+        <entry key="app/src/main/res/layout/activity_magic_text.xml" value="0.2817443351859769" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2817443351859769" />
         <entry key="app/src/main/res/layout/activity_message.xml" value="0.2817443351859769" />
         <entry key="app/src/main/res/layout/activity_messages.xml" value="0.2817443351859769" />
