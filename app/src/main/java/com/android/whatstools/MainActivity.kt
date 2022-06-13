@@ -26,10 +26,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.android.whatstools.utlis.BaseClass
 import com.android.whatstools.databinding.ActivityMainBinding
-import com.android.whatstools.screen.HomeMessagePager
-import com.android.whatstools.screen.MessageActivity
-import com.android.whatstools.screen.StatusActivity
-import com.android.whatstools.screen.WEBActivity
+import com.android.whatstools.screen.*
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -180,7 +177,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun magicText(view: View){
-
+        startActivity(Intent(this,MagicTextActivity::class.java))
     }
     fun about(view: View){
 

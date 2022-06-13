@@ -270,6 +270,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/bulk">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:textColor="@color/white"
                                 android:text="@={ViewModel.message}"
                                 android:gravity="top|start"
                                 android:minLines="4"
@@ -320,6 +321,7 @@
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/imageView2" >
                         <ImageView
+                            android:onClick="magicText"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:src="@drawable/snowflakes"

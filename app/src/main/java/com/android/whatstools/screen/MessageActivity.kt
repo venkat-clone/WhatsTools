@@ -76,7 +76,6 @@ class MessageActivity : AppCompatActivity() {
         }
         else{
             viewModel.screen.value = 2
-
         }
 
     }

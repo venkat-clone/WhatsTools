@@ -10,4 +10,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue_A">#061D4A</color>
     <color name="transparent">#00000000</color>
+    <color name="textHint">#B9B6B6B6</color>
+    <color name="tranceprent">#00000000</color>
 </resources>
