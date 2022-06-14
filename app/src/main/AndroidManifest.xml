@@ -17,6 +17,9 @@
         android:theme="@style/Theme.WhatsTools"
         tools:targetApi="31">
         <activity
+            android:name=".screen.DownloaderActivity"
+            android:exported="false" />
+        <activity
             android:name=".screen.MagicTextActivity"
             android:exported="false" />
         <activity

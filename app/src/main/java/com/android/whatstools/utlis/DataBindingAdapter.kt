@@ -65,12 +65,18 @@ fun SqureWithWidth(view: View, SqureWithWidth: Double) {
     Log.i("Squre", "Width ${view.layoutParams.width} Height ${view.layoutParams.height}")
 }
 
-@BindingAdapter("SqureWithHeight")
-fun SqureWithHeight(view: View, SqureWithWidth: Int) {
-    view.layoutParams.width = view.height
+//@BindingAdapter("SqureWithHeight")
+//fun SqureWithHeight(view: View, SqureWithWidth: Int) {
+//    view.layoutParams.width = view.height
+//}
+//@BindingAdapter("SqureWithHeight")
+//fun WidthWithHeight(view: View, SqureWithWidth: Int) {
+//    view.layoutParams.width = view.height
+//}
+@BindingAdapter("HeightWithWidth")
+fun HeightWithWidth(view: View, HeightWithWidth: Double) {
+    view.layoutParams.height = (BaseClass.deviceWidth * HeightWithWidth).roundToInt()
 }
-
-
 
 
 
