@@ -3,6 +3,7 @@ package com.android.whatstools.screen
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.SparseArray
 import android.view.LayoutInflater
 import androidx.lifecycle.ViewModelProvider
 import com.android.whatstools.databinding.ActivityDownloaderBinding
@@ -28,7 +29,7 @@ class DownloaderActivity : AppCompatActivity() {
 
     fun observer(){
         viewModel.videoUrl.observe(this){
-            Log.i("URL",it)
+
         }
     }
 

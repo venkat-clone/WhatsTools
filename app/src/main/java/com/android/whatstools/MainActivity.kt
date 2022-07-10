@@ -180,7 +180,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this,MagicTextActivity::class.java))
     }
     fun about(view: View){
-        startActivity(Intent(this,DownloaderActivity::class.java))
+        startActivity(Intent(this,InfoActivity::class.java))
     }
 
 
