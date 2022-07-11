@@ -23,6 +23,7 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
 import com.android.whatstools.MessageEntity
 import com.android.whatstools.dataBase.message.Repository
+import com.android.whatstools.dataBase.unDeleted.UnDeleted
 import com.android.whatstools.screen.MessageActivity
 import com.android.whatstools.utlis.sharedPrefarenceService
 import java.io.File
@@ -43,28 +44,50 @@ class NotificationReceiver: NotificationListenerService() {
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         if(sbn.packageName.equals("com.whatsapp") &&
             sbn.notification.tickerText==null ){
+
+
+
+
             val bundle = sbn.notification.extras
-
+            val id = bundle["last_row_id"]!!.toString()
+            Log.i("Receiver","Id:${id}")
             val profile:String=saveDp(sbn.notification)
-
-
-            if( bundle.getString("android.text").equals("This message was deleted") &&
-                sharedPrefarenceService.isStored(applicationContext)
-            ) {
-                val entity= sharedPrefarenceService.getStoredNotification(applicationContext)
+            if(UnDeleted.hasMessage(this,id)){
+                val entity= UnDeleted.getMessage(this,id)
+                UnDeleted.deleteMesssage(this,id)
                 repository.insertMessage(entity)
-                makeNotification(entity)
+                Log.i("Receiver","Storing to Db${id}")
+//                makeNotification(entity)
+            }
+            else{
+                Log.i("Receiver","Storing to Shard${id}")
+                UnDeleted.putMessage(applicationContext,id,MessageEntity(
+                    bundle.getString("android.title")!!.replace(" ",""),
+                    bundle.getString("android.text")!!,
+                    profile,
+                    date = sbn.postTime
+                ))
             }
 
-            else
-                sharedPrefarenceService.storeNotification( applicationContext,
-                    MessageEntity(
-                        bundle.getString("android.title")!!.replace(" ",""),
-                        bundle.getString("android.text")!!,
-                        profile,
-                        date = sbn.postTime
-                    )
-                )
+
+
+//            if( bundle.getString("android.text").equals("This message was deleted") &&
+//                sharedPrefarenceService.isStored(applicationContext)
+//            ) {
+//                val entity= sharedPrefarenceService.getStoredNotification(applicationContext)
+//                repository.insertMessage(entity)
+//                makeNotification(entity)
+//            }
+//
+//            else
+//                sharedPrefarenceService.storeNotification( applicationContext,
+//                    MessageEntity(
+//                        bundle.getString("android.title")!!.replace(" ",""),
+//                        bundle.getString("android.text")!!,
+//                        profile,
+//                        date = sbn.postTime
+//                    )
+//                )
         }
 
 
@@ -142,10 +165,12 @@ class NotificationReceiver: NotificationListenerService() {
 
     override fun onNotificationRemoved(sbn: StatusBarNotification) {
 
+        if(sbn.packageName.equals("com.whatsapp") &&
+            sbn.notification.tickerText==null ){
+            Log.i("Receiver","Deleting from Shared")
 
-        Log.d(
-            TAG, "id = " + sbn.id + "Package Name" + sbn.packageName +
-                    "Post time = " + sbn.postTime + "Tag = " + sbn.tag
-        )
+            UnDeleted.deleteMesssage(this,sbn.notification.extras["last_row_id"]!!.toString())
+        }
+
     }
 }
