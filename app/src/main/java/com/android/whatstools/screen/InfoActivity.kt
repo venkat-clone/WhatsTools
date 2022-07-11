@@ -17,7 +17,7 @@ class InfoActivity : AppCompatActivity() {
         "https://github.com/venkat-clone",
         "https://www.linkedin.com/in/venkey-venkey-b2aa34202/",
         "https://www.instagram.com/v____e___n__k_ey/",
-        "http://play.google.com/store/apps/details?id=$packageName"
+        "http://play.google.com/store/apps/details?id="
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
