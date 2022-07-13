@@ -1,33 +1,30 @@
 package com.android.whatstools
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.media.ThumbnailUtils
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.startActivity
-import androidx.core.content.PermissionChecker
-import androidx.core.content.getSystemService
-import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
 import androidx.core.view.setMargins
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.android.whatstools.utlis.BaseClass
 import com.android.whatstools.databinding.ActivityMainBinding
 import com.android.whatstools.screen.*
-import java.io.File
+import com.android.whatstools.utlis.BaseClass
+import io.sentry.Sentry
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mViewModel:MainActivityViewModel;
@@ -43,19 +40,40 @@ class MainActivity : AppCompatActivity() {
         binding.clickHandler = ClickHandler(baseContext)
         binding.lifecycleOwner = this
         setContentView(binding.root)
+
         binding.viewModel=mViewModel
 
 
         observers()
-        if(PermissionChecker.checkSelfPermission(this,android.Manifest.permission_group.STORAGE)==PermissionChecker.PERMISSION_DENIED){
-            mViewModel.permission.value = false
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),500)
-            }
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
 
-        }else {
-            mViewModel.getStatus()
+            if (SDK_INT >= Build.VERSION_CODES.R) {
+                Log.d("myz", "" + SDK_INT)
+                if (!Environment.isExternalStorageManager()) { mViewModel.permission.value = false
+                    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.MANAGE_EXTERNAL_STORAGE), 500
+                    ) //permission request code is just an int
+                }
+                else mViewModel.getStatus()
+            } else {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    mViewModel.permission.value = false
+                    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE), 500)
+                }
+                else mViewModel.getStatus()
+            }
+            {
+//            mViewModel.permission.value = false
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                requestPermissions(arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),500)
+//            }
+//
+//        }else {
+//            mViewModel.getStatus()
+//        }
         }
+
 
 
 
@@ -65,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode){
          500->{
-             if (grantResults[0]==PermissionChecker.PERMISSION_GRANTED) mViewModel.getStatus()
+             if (grantResults.isNotEmpty() && grantResults[0]==PackageManager.PERMISSION_DENIED) mViewModel.getStatus()
          }
         }
 
@@ -90,6 +108,7 @@ class MainActivity : AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 it.removeIf { fil->fil.path.contains(".nomedia") }
             }
+            if(binding.grid.childCount==0)
             for (i in 1..6 ) {
                 val view:ImageView = ImageView(baseContext)
                 val parms = GridLayout.LayoutParams()
@@ -114,6 +133,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 binding.lottie.visibility = View.GONE
                 binding.grid.addView(view)
+
                 println({ it[i].path.contains(".mp4") })
 
             }
@@ -180,7 +200,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this,MagicTextActivity::class.java))
     }
     fun about(view: View){
-
+        startActivity(Intent(this,InfoActivity::class.java))
     }
 
 

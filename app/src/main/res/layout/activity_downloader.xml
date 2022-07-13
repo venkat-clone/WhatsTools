@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.android.whatstools.screen.downloader.DownloaderActivityViewModel" />
+        <variable
+            name="view"
+            type="android.view.View" />
+    </data>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.Toolbar
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/ic_round_arrow_back_ios_24"
+            app:title="Video Downloader"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <androidx.cardview.widget.CardView
+            setHeightRatio="@{0.6}"
+            android:layout_margin="20dp"
+            app:cardCornerRadius="15dp"
+            app:cardBackgroundColor="@color/blue_B"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_margin="20dp"
+                android:textColorHint="@color/textHint"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="12dp"
+                android:hint="Url"
+                android:gravity="center_vertical"
+                android:text="@={viewModel.videoUrl}"
+                android:textSize="24sp"
+                android:background="@drawable/card_background_2"
+                android:backgroundTint="@color/lite_blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:layout_gravity="center"
+                android:src="@drawable/download_video"
+                android:visibility="@{viewModel.feaching?view.GONE:view.VISIBLE}"
+                tools:layout_height="300dp"
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+                <TextView
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="20dp"
+                    android:textSize="34sp"
+                    android:text="download"
+                    android:textColor="@{viewModel.vedioFeached?@color/white:@color/textHint}"
+                    android:backgroundTint="@{viewModel.vedioFeached?@color/lite_blue:@color/blue_A}"
+                    android:background="@drawable/card_background_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
+</layout>

@@ -88,11 +88,12 @@
 <!--                                android:layout_height="80dp"/>-->
                         </GridLayout>
                         <TextView
+                            android:gravity="center"
                             android:id="@+id/permession"
                             android:visibility="@{ViewModel.permission?view.GONE:view.VISIBLE}"
                             android:layout_margin="40dp"
+                            android:maxEms="33"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:layout_width="match_parent"
                             android:text="Please Enable Permission"/>
                         <com.airbnb.lottie.LottieAnimationView
@@ -123,12 +124,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <androidx.viewpager.widget.ViewPager
+                    android:visibility="@{ViewModel.messages.empty?view.GONE:view.VISIBLE}"
                     android:id="@+id/message_pager"
                     android:layout_width="match_parent"
                     android:layout_height="100dp">
 
                 </androidx.viewpager.widget.ViewPager>
                 <com.google.android.material.tabs.TabLayout
+                    android:visibility="@{ViewModel.messages.empty?view.GONE:view.VISIBLE}"
                     android:id="@+id/message_tab"
                     app:tabBackground="@drawable/dot_indicator"
                     app:tabIndicatorHeight="0dp"
@@ -137,6 +140,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <com.google.android.material.card.MaterialCardView
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="20dp"
                     app:cardCornerRadius="15dp"
                     android:layout_marginHorizontal="20dp"
@@ -344,7 +348,14 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/imageView" >
-
+                        <ImageView
+                            android:onClick="magicText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/code"
+                            app:tint="@color/white"
+                            android:padding="22dp"
+                            />
                     </androidx.cardview.widget.CardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

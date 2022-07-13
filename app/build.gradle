@@ -61,4 +61,5 @@ dependencies {
     // Room DB
     kapt "androidx.room:room-compiler:$roomKapt"
     implementation "androidx.room:room-runtime:$roomImp"
+    implementation 'io.sentry:sentry-android:6.1.4'
 }
