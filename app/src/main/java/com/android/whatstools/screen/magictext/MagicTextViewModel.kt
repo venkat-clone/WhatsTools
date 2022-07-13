@@ -35,7 +35,8 @@ class MagicTextViewModel:ViewModel() {
                 Ttext+="${" ".repeat(c1)}${starText.value}${" ".repeat(c2)}${dotText.value}${" ".repeat(c3)}${starText.value}"
         }
 //        val c1 = Random.nextInt(0, 10)
-        val c2 = Random.nextInt(20-mainText.value!!.length-1, 30-mainText.value!!.length-1)
+        val siz = mainText.value!!.length
+        val c2 = if(siz<18)  Random.nextInt(20-siz-1, 30-siz -1) else 1
 //        val c3 = Random.nextInt(c2, 30)
 //        Ttext+="\n${" ".repeat(c1)}${starText.value}${" ".repeat(c2)}${mainText.value}${" ".repeat(c3-mainText.value!!.length-3)}${starText.value}\n${Ttext}"
         if(Ttext.length>370)

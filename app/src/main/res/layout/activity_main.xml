@@ -348,7 +348,14 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/imageView" >
-
+                        <ImageView
+                            android:onClick="magicText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/code"
+                            app:tint="@color/white"
+                            android:padding="22dp"
+                            />
                     </androidx.cardview.widget.CardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

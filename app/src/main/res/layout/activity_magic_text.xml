@@ -124,14 +124,16 @@
                 app:layout_constraintTop_toBottomOf="@id/card">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
                     android:background="#00676E7E"
+                    android:scrollHorizontally="true"
                     android:backgroundTint="@color/blue_A"
                     android:hint="@string/app_name"
-                    android:maxLength="20"
+                    android:maxLength="100"
+                    android:inputType="text"
                     android:maxLines="1"
+                    android:minLines="1"
                     android:text="@={viewmodel.mainText}"
                     android:textColor="@color/white"
                     android:textColorHint="#B9B6B6B6"

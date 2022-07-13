@@ -49,15 +49,22 @@ class NotificationReceiver: NotificationListenerService() {
 
 
             val bundle = sbn.notification.extras
+            if(bundle["last_row_id"]==null) return
             val id = bundle["last_row_id"]!!.toString()
             Log.i("Receiver","Id:${id}")
             val profile:String=saveDp(sbn.notification)
-            if(UnDeleted.hasMessage(this,id)){
+            UnDeleted.putMessage(applicationContext,id,MessageEntity(
+                bundle.getString("android.title")!!.replace(" ",""),
+                bundle.getString("android.text")!!,
+                profile,
+                date = sbn.postTime
+            ))
+            if(UnDeleted.hasMessage(this,id) && bundle.getString("android.title")!="You"){
                 val entity= UnDeleted.getMessage(this,id)
                 UnDeleted.deleteMesssage(this,id)
                 repository.insertMessage(entity)
                 Log.i("Receiver","Storing to Db${id}")
-//                makeNotification(entity)
+                makeNotification(entity)
             }
             else{
                 Log.i("Receiver","Storing to Shard${id}")

@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            android:value="true"
+            name="network"
+            type="boolean" />
+        <import type="android.view.View"/>
     </data>
 
     <LinearLayout
@@ -12,6 +16,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <Toolbar
             android:id="@+id/toolbar"
             android:navigationIcon="@drawable/ic_round_arrow_back_ios_24"
@@ -20,9 +25,58 @@
             android:elevation="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_weight="1"
+            android:id="@+id/swipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
         <WebView
+            tools:visibility="gone"
+            android:visibility="@{network?View.VISIBLE:View.GONE}"
+            android:hardwareAccelerated="true"
             android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+        <LinearLayout
+            android:visibility="@{!network?View.VISIBLE:View.GONE}"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            app:lottie_fileName="no_connection.json"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+            <TextView
+                android:layout_margin="20dp"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:text="No internet connection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/retry"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/blue_B"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:text="Retry"
+                android:background="@drawable/card_background_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        </LinearLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
+
 </layout>
